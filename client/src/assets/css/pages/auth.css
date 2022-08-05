@@ -1,0 +1,10 @@
+.auth-form {
+  width: 500px;
+}
+
+.form-item {
+  display: block;
+  font-size: 15px;
+  margin: 10px 0 10px 0;
+  color: #fff;
+}

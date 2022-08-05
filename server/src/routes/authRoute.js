@@ -16,5 +16,6 @@ router.post(
 );
 
 router.post('/login',AuthController.login)
+router.post('/checkAuth',AuthController.checkAuth)
 
 module.exports = router;

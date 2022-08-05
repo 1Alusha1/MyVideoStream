@@ -1,0 +1,10 @@
+@import url('./main.css');
+
+/* pages */
+@import url('./pages/auth.css');
+
+/* components */
+@import url('./components/input.css');
+
+/* layouts */
+@import url('./layouts/auth.css');
