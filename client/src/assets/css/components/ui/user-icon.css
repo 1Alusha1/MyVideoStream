@@ -1,0 +1,20 @@
+.user-icon {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+.user-icon p {
+  margin-left: 10px;
+  color: #fff;
+}
+.user-icon img {
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.user-icon:hover {
+  background: rgb(60, 60, 60);
+  cursor: pointer;
+}

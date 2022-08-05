@@ -5,6 +5,13 @@
 
 /* components */
 @import url('./components/input.css');
+@import url('./components/header.css');
+@import url('./components/sidebar.css');
+
+/* components ui*/
+@import url('./components/ui/burger.css');
+@import url('./components/ui/user-icon.css');
 
 /* layouts */
 @import url('./layouts/auth.css');
+@import url('./layouts/main.css');

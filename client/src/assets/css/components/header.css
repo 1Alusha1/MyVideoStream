@@ -1,0 +1,32 @@
+.header {
+  height: 65px;
+  margin-bottom: 30px;
+  background: #1e1e1e;
+}
+
+.header-search {
+  display: flex;
+  justify-content: center;
+}
+
+.header input {
+  width: 90%;
+  border-radius: 5px;
+}
+
+.header-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px 5px 10px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 18px;
+}
+.header-logo p {
+  margin-left: 5px;
+}

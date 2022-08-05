@@ -4,6 +4,7 @@ import Registration from './views/auth/Registration';
 import AuthLayout from './layouts/AuthLayout';
 import MainLayout from './layouts/MainLayout';
 import Main from './views/main/Main';
+import UserChanal from './views/main/user-chanal/UserChanal';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         </Route>
         <Route path="/main" element={<MainLayout/>}>
           <Route index element={<Main />}></Route>
+          <Route path='/main/chanal/:id' element={<UserChanal />}></Route>
 
         </Route>
       </Routes>

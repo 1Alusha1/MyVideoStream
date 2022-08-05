@@ -5,6 +5,7 @@ const fileupload = require('express-fileupload');
 const cors = require('cors');
 
 const authRouter = require('./src/routes/authRoute')
+const userRouter = require('./src/routes/userRoute')
 
 
 const app = express();
@@ -14,7 +15,8 @@ app.use(cookieParser())
 app.use(fileupload())
 app.use(cors())
 
-app.use('/api/auth',authRouter  )
+app.use('/api/auth',authRouter)
+app.use('/api/user',userRouter)
 
 
 mongoose.connect(
