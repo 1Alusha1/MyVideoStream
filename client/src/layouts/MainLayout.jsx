@@ -5,6 +5,7 @@ import { fetchUserByToken } from '../asyncActions/user';
 import auth from '../async/auth';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import { useEffect } from 'react';
 
 export default function MainLayout() {
   const navigate = useNavigate();
@@ -14,12 +15,10 @@ export default function MainLayout() {
     (state) => state.burgerReduser.burgerIsActive
   );
 
-  auth.checkAuth().then((data) => {
-    if (!data.isAuth) {
-      navigate('/');
-    }
-  });
-  dispatch(fetchUserByToken());
+  useEffect(() => {
+    auth.checkAuth(navigate);
+    dispatch(fetchUserByToken());
+  },[]);
 
   return (
     <div className='main '>

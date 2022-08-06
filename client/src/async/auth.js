@@ -17,15 +17,20 @@ class AuthAsync {
     return res.json();
   }
 
-  async checkAuth() {
+  async checkAuth(navigate) {
     const res = await fetch('http://localhost:3001/api/auth/checkAuth', {
       method: 'post',
       headers: {
         'content-type': 'application/json',
         Authorization: `Bearer ${document.cookie.split('=')[1]}`,
       },
-    })
-    return res.json()
+    });
+    const data = res.json();
+    data.then((data) => {
+      if (!data.isAuth) {
+        navigate('/');
+      }
+    });
   }
 }
 
