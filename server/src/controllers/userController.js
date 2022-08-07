@@ -24,7 +24,11 @@ class UserController {
 
   async uploadVideo(req, res) {
     try {
+<<<<<<< HEAD
       const { id, name, description, username } = req.body;
+=======
+      const { id, name, description } = req.body;
+>>>>>>> 2c52634eb45199fe62cd737a5811f3d2b1125579
       const { videofile, preview } = req.files;
       try {
         fs.mkdirSync(`./uploads/${id}`, (err) => {
@@ -57,6 +61,7 @@ class UserController {
 
       const video = await new Video({
         authroId: id,
+<<<<<<< HEAD
         videoPath: videoPath
           .split('/')
           .slice(2, videoPath.length - 1)
@@ -67,6 +72,11 @@ class UserController {
           .join('/'),
         name,
         username,
+=======
+        videoPath,
+        previewPath,
+        name,
+>>>>>>> 2c52634eb45199fe62cd737a5811f3d2b1125579
         description,
         dateCreate: Date.now(),
       });
@@ -87,6 +97,7 @@ class UserController {
       console.log(err);
     }
   }
+<<<<<<< HEAD
 
   async getUserVideo(req, res) {
     try {
@@ -137,6 +148,8 @@ class UserController {
       fs.createReadStream(path).pipe(res);
     }
   }
+=======
+>>>>>>> 2c52634eb45199fe62cd737a5811f3d2b1125579
 }
 
 module.exports = new UserController();
