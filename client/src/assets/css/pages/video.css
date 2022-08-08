@@ -1,0 +1,69 @@
+.user-video {
+  display: flex;
+  justify-content: space-between;
+}
+
+.video-file {
+  width: 80%;
+}
+.video-file video {
+  width: 100%;
+  height: 55vh;
+}
+.video-file__wrapper {
+  width: 90%;
+}
+
+.user-video__name {
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 24px;
+}
+
+.user-video__detail-stat {
+  display: flex;
+  color: #b2afaf;
+}
+.video-detail__views {
+  margin-right: 15px;
+}
+
+.user-video__description {
+  margin: 30px 0;
+  color: #fff;
+}
+
+.user-video__contols {
+  display: flex;
+  color: #fff;
+}
+
+.like,
+.dislike {
+  display: flex;
+}
+
+.like p,
+.dislike p {
+  margin: 0 5px;
+}
+
+.user-video__user {
+  display: flex;
+  align-items: center;
+}
+
+.user-video__user button {
+}
+
+@media (max-width: 769px) {
+  .user-video {
+    flex-direction: column;
+  }
+  .video-file {
+    width: 100%;
+  }
+  .video-file video {
+    width: 100%;
+  }
+}

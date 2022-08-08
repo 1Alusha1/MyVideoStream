@@ -8,6 +8,9 @@ export default function UserChanal() {
           <NavLink to={`/main/chanal/${params.id}/upload-video`}>
             Загрузить видео
           </NavLink>
+          <NavLink to={`/main/chanal/${params.id}/video`}>
+            ваши видео
+          </NavLink>
       </ul>
     </div>
     {params.id}

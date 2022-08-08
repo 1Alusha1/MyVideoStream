@@ -17,6 +17,26 @@ class User {
       },
     });
   }
+  async getUserVideos(id) {
+    const res = await fetch('http://localhost:3001/api/user/getUserVideos', {
+      method: 'POST',
+      body: JSON.stringify({ id }),
+      headers: { 'content-type': 'application/json' },
+    });
+
+    const data = res.json();
+    return data;
+  }
+  async getUserVideo(id) {
+    const res = await fetch('http://localhost:3001/api/user/getUserVideo', {
+      method: 'POST',
+      body: JSON.stringify({ id }),
+      headers: { 'content-type': 'application/json' },
+    });
+
+    const data = res.json();
+    return data;
+  }
 }
 
 export default new User();

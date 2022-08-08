@@ -2,11 +2,13 @@
 
 /* pages */
 @import url('./pages/auth.css');
+@import url('./pages/video.css');
 
 /* components */
 @import url('./components/input.css');
 @import url('./components/header.css');
 @import url('./components/sidebar.css');
+@import url('./components/video-component.css');
 
 /* components ui*/
 @import url('./components/ui/burger.css');

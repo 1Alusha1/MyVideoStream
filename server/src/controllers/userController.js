@@ -88,7 +88,7 @@ class UserController {
     }
   }
 
-  async getUserVideo(req, res) {
+  async getUserVideos(req, res) {
     try {
       const { id } = req.body;
       Video.find({ authroId: id }, (err, video) => {
@@ -100,6 +100,20 @@ class UserController {
       res.status(404).json({ message: 'Видео не найдены' });
     }
   }
+
+  async getUserVideo(req, res) {
+    try {
+      const { id } = req.body;
+      Video.find({ _id: id }, (err, video) => {
+        if (err) console.log(err);
+        res.status(200).json(video);
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(404).json({ message: 'Видео не найдены' });
+    }
+  }
+
   getVideoPreview(req, res) {
     res.sendFile(
       `D:/js/myVideoStream/server/uploads/${req.params.id}/${req.params.videoName}/${req.params.file}`
