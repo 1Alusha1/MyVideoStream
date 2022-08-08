@@ -67,6 +67,9 @@ class UserController {
           .join('/'),
         name,
         username,
+        videoPath,
+        previewPath,
+        name,
         description,
         dateCreate: Date.now(),
       });
