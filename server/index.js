@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const authRouter = require('./src/routes/authRoute');
 const userRouter = require('./src/routes/userRoute');
+const videoRouter = require('./src/routes/videoRoute');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(cors());
 
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
+app.use('/api/video', videoRouter);
 
 mongoose.connect(
   'mongodb://localhost:27017/MyVideoStream',

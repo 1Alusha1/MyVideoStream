@@ -48,6 +48,8 @@ class UserController {
       const videoPath = `./uploads/${id}/${name}/${videofile.name}`;
       const previewPath = `./uploads/${id}/${name}/${preview.name}`;
 
+      const videoDBPath = `${id}/${name}/${videofile.name}`;
+      const previewDBPath = `${id}/${name}/${preview.name}`;
       videofile.mv(videoPath, (err) => {
         if (err) console.log(err);
       });
@@ -57,18 +59,10 @@ class UserController {
 
       const video = await new Video({
         authroId: id,
-        videoPath: videoPath
-          .split('/')
-          .slice(2, videoPath.length - 1)
-          .join('/'),
-        previewPath: previewPath
-          .split('/')
-          .slice(2, previewPath.length - 1)
-          .join('/'),
+        videoPath: videoDBPath,
+        previewPath: previewDBPath,
         name,
         username,
-        videoPath,
-        previewPath,
         name,
         description,
         dateCreate: Date.now(),
@@ -119,7 +113,7 @@ class UserController {
 
   getVideoPreview(req, res) {
     res.sendFile(
-      `D:/js/myVideoStream/server/uploads/${req.params.id}/${req.params.videoName}/${req.params.file}`
+      `D:/js/MyVideoStream/server/uploads/${req.params.id}/${req.params.videoName}/${req.params.file}`
     );
   }
   getVideoFile(req, res) {
