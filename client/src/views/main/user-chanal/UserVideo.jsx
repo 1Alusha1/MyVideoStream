@@ -3,17 +3,44 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Video from '../../../components/Video';
 import UserIcon from '../../../components/ui/UserIcon';
+import { useSelector } from 'react-redux';
+import videoAsync from '../../../async/video';
 
 export default function UserVideo() {
   const params = useParams();
   const [video, setVideo] = useState([]);
+  let [like, setLike] = useState();
+  let [disLike, setdisLike] = useState();
+  const curentUser = useSelector((state) => state.userReducer.user.id);
   useEffect(() => {
     user.getUserVideo(params.id).then((data) => {
       setVideo(data);
+      setLike(data[0].like);
+      setdisLike(data[0].dislike);
     });
   }, []);
 
-  console.log(video);
+  const sendLike = () => {
+    videoAsync.like({ id: params.id, userId: curentUser }).then((data) => {
+      data.message === 'Лайк Поставлен'
+        ? setLike((like += 1))
+        : setLike((like -= 1));
+    });
+  };
+  const sendDisLike = () => {
+    videoAsync.disLike({ id: params.id, userId: curentUser }).then((data) => {
+      data.message === 'Дизлайк Поставлен'
+        ? setdisLike((disLike += 1))
+        : setdisLike((disLike -= 1));
+    });
+  };
+  const subscribe = () => {
+    videoAsync
+      .subscribe({ userId: curentUser, authorId: video[0].authroId })
+      .then((data) => {
+        console.log(data);
+      });
+  };
   return (
     <div className='user-video'>
       {video.length ? (
@@ -36,23 +63,29 @@ export default function UserVideo() {
               </div>
 
               <div className='user-video__contols'>
-                <div className='like'>
-                  <p>{video[0].like}</p> <button>Наравиться</button>
+                <div className='like' onClick={sendLike}>
+                  <p>{like}</p> <button>Наравиться</button>
                 </div>
-                <div className='dislike'>
-                  <p>{video[0].dislike}</p> <button>Не наравиться</button>
+                <div className='dislike' onClick={sendDisLike}>
+                  <p>{disLike}</p> <button>Не наравиться</button>
                 </div>
               </div>
 
               <div className='user-video__user'>
                 <UserIcon username={video[0].username} />
-                <button>Подписаться</button>
+                <button onClick={subscribe}>Подписаться</button>
               </div>
 
               <div className='comments'>
                 <form>
                   <div className='form-item'>
-                    <textarea placeholder='Написать коментарий' name='' id='' cols='30' rows='10'></textarea>
+                    <textarea
+                      placeholder='Написать коментарий'
+                      name=''
+                      id=''
+                      cols='30'
+                      rows='10'
+                    ></textarea>
                   </div>
                 </form>
               </div>

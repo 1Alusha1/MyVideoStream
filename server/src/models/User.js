@@ -9,6 +9,7 @@ const userSchema = new Schema({
   userSubscriptions: Array,
   usersFollowers: Array,
   userLike: Array,
+  userDisLike: Array,
   watchedVideos: Array,
   token: String,
 });
