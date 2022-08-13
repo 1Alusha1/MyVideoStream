@@ -13,6 +13,7 @@
 /* components ui*/
 @import url('./components/ui/burger.css');
 @import url('./components/ui/user-icon.css');
+@import url('./components/ui/comment.css');
 
 /* layouts */
 @import url('./layouts/auth.css');

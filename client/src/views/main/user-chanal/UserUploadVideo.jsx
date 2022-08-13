@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux';
 import User from '../../../async/user';
 export default function UserUploadVideo() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [preview, setPreview] = useState('');
   const [videofile, setVideofile] = useState('');
-  const id = useSelector(state=> state.userReducer.user.id)
+  const id = useSelector((state) => state.userReducer.user.id);
+  const username = useSelector((state) => state.userReducer.user.username);
   const uploadVideo = (e) => {
     e.preventDefault();
     const userData = {
@@ -15,6 +16,7 @@ export default function UserUploadVideo() {
       description,
       preview,
       videofile,
+      username,
     };
     User.uploadVideo(userData);
   };

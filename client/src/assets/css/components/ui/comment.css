@@ -1,0 +1,24 @@
+.comments {
+  margin-top: 30px;
+}
+.comments .comment {
+  display: flex;
+}
+.comments-body__info {
+  display: flex;
+}
+.comments-body__info a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 15px;
+}
+
+.comment-datecreate {
+  margin-left: 15px;
+  color: #9e9b9b;
+}
+
+.comment-text {
+  padding: 15px;
+  color: #fff;
+}

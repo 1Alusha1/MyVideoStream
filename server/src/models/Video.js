@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const videoSchema = new Schema({
   authroId: String,
+  authroname: String,
   videoPath: String,
   previewPath: String,
   username:String,

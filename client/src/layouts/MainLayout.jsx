@@ -18,7 +18,7 @@ export default function MainLayout() {
   useEffect(() => {
     auth.checkAuth(navigate);
     dispatch(fetchUserByToken());
-  },[]);
+  }, []);
 
   return (
     <div className='main '>

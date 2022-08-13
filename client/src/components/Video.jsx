@@ -4,7 +4,6 @@ import UserIcon from './ui/UserIcon';
 export default function Video({ video, className }) {
   const navigate = useNavigate();
   const params = useParams();
-
   return (
     <div className={className ? `${className} video` : 'video'}>
       <div
@@ -19,7 +18,7 @@ export default function Video({ video, className }) {
       <div className='video-info'>
         <div className='video-wrapper'>
           <div className='video-author'>
-            <NavLink to={`/main/chanal/${params.id}`}>
+            <NavLink to={`/main/chanal/${video.authroId}`}>
               <UserIcon />
             </NavLink>
           </div>

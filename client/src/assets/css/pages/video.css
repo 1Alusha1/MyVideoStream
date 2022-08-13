@@ -66,4 +66,7 @@
   .video-file video {
     width: 100%;
   }
+  .video-file__wrapper {
+    width: 100%;
+  }
 }

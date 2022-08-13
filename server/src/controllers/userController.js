@@ -63,7 +63,6 @@ class UserController {
         previewPath: previewDBPath,
         name,
         username,
-        name,
         description,
         dateCreate: Date.now(),
       });
