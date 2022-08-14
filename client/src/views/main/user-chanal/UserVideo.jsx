@@ -18,11 +18,15 @@ export default function UserVideo() {
 
   useEffect(() => {
     videoAsync.view(params.id);
-    user.getUserVideo(params.id).then((data) => {
-      setVideo(data);
-      setLike(data[0].like);
-      setdisLike(data[0].dislike);
-    });
+    user.getUserVideo(params.id).then(
+      (data) => {
+        setVideo(data);
+        setLike(data[0].like);
+        setdisLike(data[0].dislike);
+      },
+      [video]
+    );
+    console.log(video);
     videoAsync.getComments(params.id).then((data) => {
       setComments(data);
     });

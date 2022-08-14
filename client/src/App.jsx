@@ -8,6 +8,7 @@ import UserChanal from './views/main/user-chanal/UserChanal';
 import UserUploadVideo from './views/main/user-chanal/UserUploadVideo';
 import UserVideos from './views/main/user-chanal/UserVideos';
 import UserVideo from './views/main/user-chanal/UserVideo';
+import UserChanalLayout from './layouts/UserChanalLayout';
 function App() {
   return (
     <Router>
@@ -18,13 +19,15 @@ function App() {
         </Route>
         <Route path='/main' element={<MainLayout />}>
           <Route index element={<Main />}></Route>
+          <Route path='/main/video/:id' element={<UserVideo />}></Route>
+        </Route>
+        <Route path='/main/chanal' element={<UserChanalLayout />}>
           <Route path='/main/chanal/:id' element={<UserChanal />}></Route>
           <Route
             path='/main/chanal/:id/upload-video'
             element={<UserUploadVideo />}
           ></Route>
           <Route path='/main/chanal/:id/video' element={<UserVideos />}></Route>
-          <Route path='/main/video/:id' element={<UserVideo />}></Route>
         </Route>
       </Routes>
     </Router>

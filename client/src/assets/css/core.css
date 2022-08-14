@@ -3,6 +3,7 @@
 /* pages */
 @import url('./pages/auth.css');
 @import url('./pages/video.css');
+@import url('./pages/user-chanal.css');
 
 /* components */
 @import url('./components/input.css');

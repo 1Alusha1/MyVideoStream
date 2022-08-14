@@ -1,0 +1,51 @@
+.user-chanal-header {
+  background: #1e1e1e;
+  padding: 15px 0 0 0px;
+}
+.header-chanal-user {
+  display: flex;
+  align-items: center;
+}
+.user-chanal-header__info {
+  display: flex;
+  align-items: center;
+}
+
+.user-chanal-header__info .user-icon {
+  margin-left: 15px;
+}
+
+.user-chanal-header__detail {
+  margin-left: 15px;
+  color: #fff;
+}
+
+/* list */
+.user-chanal-list {
+  display: flex;
+  margin-top: 40px;
+}
+.user-chanal-list {
+  justify-content: space-around;
+}
+.user-chanal-list a {
+  line-height: 100%;
+  border-bottom: 2px solid gray;
+}
+
+.user-chanal-list a.active {
+  border-color: rgb(31, 160, 106);
+}
+
+.user-chanal-list button {
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  color: #fff;
+  background: #1e1e1e;
+}
+.user-chanal-list a:hover {
+  border-color: rgb(31, 160, 106);
+}

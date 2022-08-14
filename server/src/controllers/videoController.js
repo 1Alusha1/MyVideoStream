@@ -89,13 +89,11 @@ class VideoController {
       const { userId, authorId, authorname, username } = req.body;
       let flag;
       User.findOne({ _id: userId }, (err, user) => {
-        console.log(user)
         if (user.userSubscriptions.length) {
           flag = user.userSubscriptions.filter((item) =>
             item.authorId == authorId ? item : false
           );
         }
-        console.log(flag)
         if (flag) {
           User.findOneAndUpdate(
             { _id: authorId },

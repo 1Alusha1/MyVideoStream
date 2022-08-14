@@ -1,2 +1,7 @@
 node_modules
-./uploads/*
+
+upload/*
+.mp4
+.jpeg
+.jpg
+.png
