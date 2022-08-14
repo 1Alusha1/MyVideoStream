@@ -12,7 +12,8 @@
   left: 0;
   transition: 0.3s;
 }
-.sidebar-list a {
+.sidebar-list a,
+.subscribers-list a {
   color: #fff;
   text-decoration: none;
 }

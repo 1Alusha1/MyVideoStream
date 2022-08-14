@@ -37,6 +37,12 @@ class User {
     const data = res.json();
     return data;
   }
+  async getUserSubscriptions(id) {
+    const res = await fetch(
+      `http://localhost:3001/api/user/getUserSubscriptions?id=${id}`
+    );
+    return res.json();
+  }
 }
 
 export default new User();

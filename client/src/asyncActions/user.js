@@ -1,5 +1,5 @@
-import { getUserByTokenAction } from '../store/userReducer';
-
+import { getUserByTokenAction, getUserSubscriptions } from '../store/userReducer';
+import user from '../async/user';
 export const fetchUserByToken = () => {
   return async (dispatch) => {
     const res = await fetch('http://localhost:3001/api/user/getUserByToken', {
@@ -10,6 +10,11 @@ export const fetchUserByToken = () => {
       },
     });
     const data = res.json();
-    data.then((data) => dispatch(getUserByTokenAction(data)));
+    data.then((data) => {
+      dispatch(getUserByTokenAction(data));
+      user.getUserSubscriptions(data.id).then((subscription) => {
+        dispatch(getUserSubscriptions(subscription))
+      });
+    });
   };
 };

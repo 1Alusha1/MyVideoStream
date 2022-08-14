@@ -147,6 +147,20 @@ class UserController {
       fs.createReadStream(path).pipe(res);
     }
   }
+  async getUserSubscriptions(req, res) {
+    try {
+      const { id } = req.query;
+      User.findOne({ _id: id }, (err, user) => {
+        if (err) {
+          return  res.status(500).json(err);
+        }
+        res.status(200).json(user.userSubscriptions);
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ message: 'Ошибка сервера' });
+    } 
+  }
 }
 
 module.exports = new UserController();

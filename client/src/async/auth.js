@@ -31,6 +31,7 @@ class AuthAsync {
         navigate('/');
       }
     });
+    
   }
 }
 
