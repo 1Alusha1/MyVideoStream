@@ -10,7 +10,7 @@ export default function Header() {
       <div className='container'>
         <div className='user-chanal-header__info'>
           <Burger />
-          <NavLink to={`/main/chanal/${user.id}`}>
+          <NavLink to={`/main/channel/${user.id}/video`}>
             <UserIcon />
           </NavLink>
           <div className='user-chanal-header__detail'>
@@ -24,15 +24,9 @@ export default function Header() {
             <>
               <NavLink
                 className={({ isActive }) => (isActive ? 'active' : '')}
-                to={`/main/chanal/${params.id}/upload-video`}
+                to={`/main/channel/${params.id}/upload-video`}
               >
                 <button>Загрузить видео</button>
-              </NavLink>
-              <NavLink
-                className={({ isActive }) => (isActive ? 'active' : '')}
-                to={`/main/chanal/${params.id}/upload-video`}
-              >
-                <button>Статистика</button>
               </NavLink>
             </>
           ) : (
@@ -41,14 +35,14 @@ export default function Header() {
 
           <NavLink
             className={({ isActive }) => (isActive ? 'active' : '')}
-            to={`/main/chanal/${params.id}/upload-video`}
+            to={`/main/channel/${params.id}/about`}
           >
             <button>О канале</button>
           </NavLink>
 
           <NavLink
             className={({ isActive }) => (isActive ? 'active' : '')}
-            to={`/main/chanal/${params.id}/video`}
+            to={`/main/channel/${params.id}/video`}
           >
             <button>Все видео</button>
           </NavLink>

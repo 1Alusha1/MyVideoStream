@@ -18,7 +18,7 @@ export default function Video({ video, className }) {
       <div className='video-info'>
         <div className='video-wrapper'>
           <div className='video-author'>
-            <NavLink to={`/main/chanal/${video.authroId}`}>
+            <NavLink to={`/main/channel/${video.authroId}`}>
               <UserIcon />
             </NavLink>
           </div>
@@ -29,7 +29,7 @@ export default function Video({ video, className }) {
             >
               {video.name}
             </div>
-            <NavLink to={`/main/chanal/${params.id}`}>
+            <NavLink to={`/main/channel/${params.id}`}>
               <div className='video-author'>{video.username}</div>
             </NavLink>
             <div className='video-detail-stat'>

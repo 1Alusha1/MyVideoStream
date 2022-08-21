@@ -1,6 +1,6 @@
 node_modules
 
-upload/*
+uploads/*
 .mp4
 .jpeg
 .jpg

@@ -152,14 +152,71 @@ class UserController {
       const { id } = req.query;
       User.findOne({ _id: id }, (err, user) => {
         if (err) {
-          return  res.status(500).json(err);
+          return res.status(500).json(err);
         }
         res.status(200).json(user.userSubscriptions);
       });
     } catch (err) {
       console.log(err);
       res.status(500).json({ message: 'Ошибка сервера' });
-    } 
+    }
+  }
+
+  async setAboutText(req, res) {
+    try {
+      const { aboutText, id } = req.body;
+
+      User.findOneAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            'about.text': aboutText,
+          },
+        },
+        { new: true },
+        (err) => {
+          if (err) console.log(err);
+          res.status(200).json({ message: 'Информация о канале обновлена' });
+        }
+      );
+    } catch (err) {
+      if (err) console.log(err);
+      res.status(500).json({ message: 'Ошибка сервера' });
+    }
+  }
+
+  async setAboutLink(req, res) {
+    try {
+      const { link, id } = req.body;
+      User.findOneAndUpdate(
+        { _id: id },
+        {
+          $push: {
+            'about.link': link,
+          },
+        },
+        { new: true },
+        (err) => {
+          if (err) console.log(err);
+          res.status(200).json({ message: 'Информация о канале обновлена' });
+        }
+      );
+    } catch (err) {
+      if (err) console.log(err);
+      res.status(500).json({ message: 'Ошибка сервера' });
+    }
+  }
+
+  async getAboutInfo(req, res) {
+    try {
+      User.findOne({ _id: req.params.id }, (err, data) => {
+        if (err) console.log(err);
+        res.status(200).json(data.about);
+      });
+    } catch (err) {
+      if (err) console.log(err);
+      res.status(500).json({ message: 'Ошибка сервера' });
+    }
   }
 }
 

@@ -6,7 +6,7 @@ class VideoController {
     try {
       const { id, userId } = req.body;
       chekUserLikeOrDislike(userId, id).then((data) => {
-        if (data) {
+        if (data.length) {
           Video.findOneAndUpdate({ _id: id }, { $inc: { like: -1 } }, (err) => {
             if (err) throw err;
           });
@@ -43,7 +43,7 @@ class VideoController {
     try {
       const { id, userId } = req.body;
       chekUserLikeOrDislike(userId, id, false).then((data) => {
-        if (data) {
+        if (data.length > 0) {
           Video.findOneAndUpdate(
             { _id: id },
             { $inc: { dislike: -1 } },

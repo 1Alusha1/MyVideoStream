@@ -12,6 +12,7 @@ const userSchema = new Schema({
   userDisLike: Array,
   watchedVideos: Array,
   token: String,
+  about: Object
 });
 
 module.exports = mongoose.model('User', userSchema);

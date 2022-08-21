@@ -12,7 +12,7 @@ export default function Header() {
           <Burger />
           <p>MyVideoStream</p>
         </div>
-        <NavLink to={`/main/chanal/${userId}`}>
+        <NavLink to={`/main/channel/${userId}/video`}>
           <UserIcon />
         </NavLink>
       </div>

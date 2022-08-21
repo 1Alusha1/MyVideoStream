@@ -4,11 +4,11 @@ import Registration from './views/auth/Registration';
 import AuthLayout from './layouts/AuthLayout';
 import MainLayout from './layouts/MainLayout';
 import Main from './views/main/Main';
-import UserChanal from './views/main/user-chanal/UserChanal';
-import UserUploadVideo from './views/main/user-chanal/UserUploadVideo';
-import UserVideos from './views/main/user-chanal/UserVideos';
-import UserVideo from './views/main/user-chanal/UserVideo';
-import UserChanalLayout from './layouts/UserChanalLayout';
+import UserUploadVideo from './views/main/user-channel/UserUploadVideo';
+import UserVideos from './views/main/user-channel/UserVideos';
+import UserVideo from './views/main/user-channel/UserVideo';
+import UserChannelLayout from './layouts/UserChannelLayout';
+import UserAbout from './views/main/user-channel/UserAbout';
 function App() {
   return (
     <Router>
@@ -21,13 +21,13 @@ function App() {
           <Route index element={<Main />}></Route>
           <Route path='/main/video/:id' element={<UserVideo />}></Route>
         </Route>
-        <Route path='/main/chanal' element={<UserChanalLayout />}>
-          <Route path='/main/chanal/:id' element={<UserChanal />}></Route>
+        <Route path='/main/channel' element={<UserChannelLayout />}>
           <Route
-            path='/main/chanal/:id/upload-video'
+            path='/main/channel/:id/upload-video'
             element={<UserUploadVideo />}
           ></Route>
-          <Route path='/main/chanal/:id/video' element={<UserVideos />}></Route>
+          <Route path='/main/channel/:id/video' element={<UserVideos />}></Route>
+          <Route path='/main/channel/:id/about' element={<UserAbout />}></Route>
         </Route>
       </Routes>
     </Router>

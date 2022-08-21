@@ -29,7 +29,7 @@ export default function Sidebar() {
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? 'active' : '')}
-          to={`/main/chanal/${userId}`}
+          to={`/main/channel/${userId}/video`}
           onClick={() => dispatch({ type: 'BURGER_IS_ACTIVE' })}
         >
           <li>Ваш канал</li>
@@ -44,7 +44,7 @@ export default function Sidebar() {
               <NavLink
                 onClick={() => dispatch({ type: 'BURGER_IS_ACTIVE' })}
                 key={sub.authorId}
-                to={`/main/chanal/${sub.authorId}`}
+                to={`/main/channel/${sub.authorId}/video`}
               >
                 <UserIcon sub={sub} />
               </NavLink>

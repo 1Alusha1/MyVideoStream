@@ -4,6 +4,7 @@ class User {
 
     body.append('id', userData.id);
     body.append('name', userData.name);
+    body.append('username', userData.username);
     body.append('description', userData.description);
     body.append('preview', userData.preview);
     body.append('videofile', userData.videofile);
@@ -41,6 +42,28 @@ class User {
     const res = await fetch(
       `http://localhost:3001/api/user/getUserSubscriptions?id=${id}`
     );
+    return res.json();
+  }
+  async getAboutInfo(id) {
+    const res = await fetch(
+      `http://localhost:3001/api/user/getAboutInfo/${id}`
+    );
+    return res.json();
+  }
+  async setAboutText(userData) {
+    const res = await fetch(`http://localhost:3001/api/user/setAboutText`, {
+      method: 'POST',
+      body: JSON.stringify(userData),
+      headers:{'content-type':'application/json'}
+    });
+    return res.json();
+  }
+  async setAboutLink(userData) {
+    const res = await fetch(`http://localhost:3001/api/user/setAboutLink`, {
+      method: 'POST',
+      body: JSON.stringify(userData),
+      headers:{'content-type':'application/json'}
+    });
     return res.json();
   }
 }
