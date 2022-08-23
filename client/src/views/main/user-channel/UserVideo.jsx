@@ -6,7 +6,7 @@ import UserIcon from '../../../components/ui/UserIcon';
 import Comments from '../../../components/ui/Comments';
 import { useSelector } from 'react-redux';
 import videoAsync from '../../../async/video';
-
+import { correctDate } from '../../../use/correctDate';
 export default function UserVideo() {
   const params = useParams();
   const [video, setVideo] = useState([]);
@@ -100,7 +100,7 @@ export default function UserVideo() {
               <div className='user-video__detail-stat'>
                 <div className='video-detail__views'>{video[0].views}</div>
                 <div className='video-detail__date-create'>
-                  {video[0].dateCreate}
+                  {correctDate(Number(video[0].dateCreate))}
                 </div>
               </div>
               <div className='user-video__description'>

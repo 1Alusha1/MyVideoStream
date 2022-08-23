@@ -1,9 +1,11 @@
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import UserIcon from './ui/UserIcon';
+import {correctDate} from '../use/correctDate';
 
 export default function Video({ video, className }) {
   const navigate = useNavigate();
   const params = useParams();
+
   return (
     <div className={className ? `${className} video` : 'video'}>
       <div
@@ -34,7 +36,9 @@ export default function Video({ video, className }) {
             </NavLink>
             <div className='video-detail-stat'>
               <div className='video-views'>{video.views}</div>
-              <div className='video-data-create'>{video.dateCreate}</div>
+              <div className='video-data-create'>
+                {correctDate(Number(video.dateCreate))}
+              </div>
             </div>
           </div>
         </div>
