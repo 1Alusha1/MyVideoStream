@@ -69,24 +69,23 @@ export default function UserAbout() {
       ) : (
         ''
       )}
-      <h2>О канале:</h2>
+      <h2 className='about-channel-title'>О канале:</h2>
       {showForm ? (
         <form onSubmit={(e) => changeAbout(e)}>
           <textarea onChange={(e) => setAboutText(e.target.value)}></textarea>
           <input type='submit' value='Изменить' />
         </form>
       ) : (
-        about.text && <div className='about-channel'>{about.text}</div>
+        about.text && <div className='about-channel-text'>{about.text}</div>
       )}
-      <h2>Социальные сети:</h2>
+      <h2 className='about-channel-social'>Социальные сети:</h2>
       {about.link && (
-        <div className='about-channel'>
+        <div className='about-channel-social__links'>
           {about.link.map((item, idx) => {
             return (
-              <>
-                <a href={item}>{pretyLink(item)}</a>
-                <br />
-              </>
+              <a key={idx} className='about-channel-link' href={item}>
+                {pretyLink(item)}
+              </a>
             );
           })}
         </div>

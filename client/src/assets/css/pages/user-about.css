@@ -1,0 +1,26 @@
+.about-channel-title,
+.about-channel-social {
+  margin: 25px 0;
+  font-size: 25px;
+  color: #fff;
+}
+.about-channel-text {
+  margin-bottom: 15px;
+  color: #fff;
+  font-size: 18px;
+}
+
+.about-channel-social__links {
+  padding-bottom: 20px;
+}
+
+.about-channel-link {
+  color: #fff;
+  display: block;
+}
+
+@media (max-width: 426px) {
+  .about-channel-text {
+    text-align: justify;
+  }
+}
