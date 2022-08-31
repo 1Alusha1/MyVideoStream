@@ -2,6 +2,7 @@ import Burger from './ui/Burger';
 import UserIcon from './ui/UserIcon';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Search from './Search';
 export default function Header() {
   const userId = useSelector((state) => state.userReducer.user.id);
 
@@ -16,9 +17,7 @@ export default function Header() {
           <UserIcon />
         </NavLink>
       </div>
-      <div className='header-search'>
-        <input placeholder='Поиск' type='text' />
-      </div>
+      <Search />
     </header>
   );
 }

@@ -244,6 +244,22 @@ class UserController {
       res.status(500).json({ message: 'Ошибка сервера' });
     }
   }
+
+  async search(req, res) {
+    try {
+      const { videoName } = req.body;
+
+      Video.findOne({ name: videoName }, (err, data) => {
+        if (err) console.log(err);
+        data !== null
+          ? res.status(200).json(data)
+          : res.status(404).json({ message: 'Видео не найдено' });
+      });
+    } catch (err) {
+      if (err) console.log(err);
+      res.status(500).json({ message: 'Ошибка сервера' });
+    }
+  }
 }
 
 module.exports = new UserController();

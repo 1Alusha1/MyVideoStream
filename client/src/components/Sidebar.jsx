@@ -41,13 +41,13 @@ export default function Sidebar() {
         <ul className='subscribers-list'>
           {subscription.length ? (
             subscription.map((sub) => (
-              <NavLink
+              <a
                 onClick={() => dispatch({ type: 'BURGER_IS_ACTIVE' })}
                 key={sub.authorId}
-                to={`/main/channel/${sub.authorId}/video`}
+                href={`/main/channel/${sub.authorId}/video`}
               >
                 <UserIcon sub={sub} />
-              </NavLink>
+              </a>
             ))
           ) : (
             <p>Подписок нет</p>

@@ -14,13 +14,13 @@ export default function UserSubscriptions() {
       await userAsync
         .getUserSubscriptionsVideo(getSubscribersVideo)
         .then((userVideo) => {
-          setSubscribersVideo([ ...userVideo]);
+          setSubscribersVideo([...userVideo]);
         });
     });
   }, []);
   return (
     <div>
-      <h1>subscribers</h1>
+      <h1 className='main-title'>Видео с подписаных каналов</h1>
 
       <div className='user-videos'>
         {subscribersVideo.length ? (

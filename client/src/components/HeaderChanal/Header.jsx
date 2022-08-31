@@ -10,9 +10,9 @@ export default function Header() {
       <div className='container'>
         <div className='user-chanal-header__info'>
           <Burger />
-          <NavLink to={`/main/channel/${user.id}/video`}>
+          <a href={`/main/channel/${user.id}/video`}>
             <UserIcon />
-          </NavLink>
+          </a>
           <div className='user-chanal-header__detail'>
             <p className='username'>{user.username}</p>
             <p className='followers'>10 подпищиков</p>

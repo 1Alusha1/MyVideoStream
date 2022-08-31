@@ -117,6 +117,19 @@ class User {
       console.log(err);
     }
   }
+
+  async search(videoName) {
+    try {
+      const res = await fetch(`http://localhost:3001/api/user/search`, {
+        method: 'POST',
+        body: JSON.stringify({ videoName }),
+        headers: { 'content-type': 'application/json' },
+      });
+      return res.json();
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 export default new User();
