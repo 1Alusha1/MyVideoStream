@@ -7,15 +7,17 @@ import Comments from '../../../components/ui/Comments';
 import { useSelector } from 'react-redux';
 import videoAsync from '../../../async/video';
 import { correctDate } from '../../../use/correctDate';
+import userAsync from '../../../async/user';
+
 export default function UserVideo() {
   const params = useParams();
   const [video, setVideo] = useState([]);
   const [comments, setComments] = useState('');
   const [comment, setComment] = useState('');
+  const [subscribersVideo, setSubscribersVideo] = useState([]);
   let [like, setLike] = useState();
   let [disLike, setdisLike] = useState();
-  const curentUser = useSelector((state) => state.userReducer.user);
-
+  const curentUser = useSelector((state) => state.userReducer.user.id);
   useEffect(() => {
     videoAsync.view(params.id);
     user.getUserVideo(params.id).then(
@@ -26,22 +28,36 @@ export default function UserVideo() {
       },
       [video]
     );
-    console.log(video);
     videoAsync.getComments(params.id).then((data) => {
       setComments(data);
     });
   }, []);
 
+  if (!subscribersVideo.length) {
+    userAsync.getUserSubscriptions(curentUser).then(async (data) => {
+      const getSubscribersVideo = [];
+      await data.forEach((users) => getSubscribersVideo.push(users.authorId));
+
+      console.log(getSubscribersVideo);
+      await userAsync
+        .getUserSubscriptionsVideo(getSubscribersVideo)
+        .then((userVideo) => {
+          setSubscribersVideo([...userVideo]);
+        });
+    });
+  }
+
   const sendLike = () => {
-    videoAsync.like({ id: params.id, userId: curentUser.id }).then((data) => {
+    videoAsync.like({ id: params.id, userId: curentUser }).then((data) => {
       data.message === 'Лайк Поставлен'
         ? setLike((like += 1))
         : setLike((like -= 1));
     });
   };
+
   const sendDisLike = () => {
     videoAsync
-      .disLike({ id: params.id, userId: curentUser.id })
+      .disLike({ id: params.id, userId: curentUser })
       .then((data) => {
         data.message === 'Дизлайк Поставлен'
           ? setdisLike((disLike += 1))
@@ -85,7 +101,6 @@ export default function UserVideo() {
     ]);
     setComment('');
   };
-
   return (
     <div className='user-video'>
       {video.length ? (
@@ -117,7 +132,7 @@ export default function UserVideo() {
               </div>
 
               <div className='user-video__user'>
-                <Link to={`/main/channel/${video[0].authroId}`}>
+                <Link to={`/main/channel/${video[0].authroId}/video`}>
                   <UserIcon username={video[0].username} />
                 </Link>
                 <button onClick={subscribe}>Подписаться</button>
@@ -158,11 +173,19 @@ export default function UserVideo() {
           </div>
 
           <div className='user-videos video-column'>
-            <Video className='video-single' video={video[0]} />
-            <Video className='video-single' video={video[0]} />
-            <Video className='video-single' video={video[0]} />
-            <Video className='video-single' video={video[0]} />
-            <Video className='video-single' video={video[0]} />
+            {subscribersVideo.length ? (
+              subscribersVideo.map((video) => {
+                return (
+                  <Video
+                    className='video-single'
+                    key={video._id}
+                    video={video}
+                  />
+                );
+              })
+            ) : (
+              <p>Видео нет</p>
+            )}
           </div>
         </>
       ) : (

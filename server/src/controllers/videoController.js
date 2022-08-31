@@ -94,7 +94,7 @@ class VideoController {
             item.authorId == authorId ? item : false
           );
         }
-        if (flag) {
+        if (flag.length > 0) {
           User.findOneAndUpdate(
             { _id: authorId },
             { $pull: { usersFollowers: { userId, username } } },

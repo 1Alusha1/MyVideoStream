@@ -119,14 +119,11 @@ class UserController {
     const path = `uploads/${req.params.id}/${req.params.videoName}/${req.params.file}`;
     const stat = fs.statSync(path);
     const fileSize = stat.size;
-    console.log(stat);
     const range = req.headers.range;
     if (range) {
-      console.log('we have range', range);
       const parts = range.replace(/bytes=/, '').split('-');
       const start = parseInt(parts[0], 10);
       const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
-      console.log(parts);
       const chunksize = end - start + 1;
       const file = fs.createReadStream(path, { start, end });
       const head = {
@@ -138,7 +135,6 @@ class UserController {
       res.writeHead(206, head);
       file.pipe(res);
     } else {
-      console.log('no range', range);
       const head = {
         'Content-Length': fileSize,
         'Content-Type': 'video/mp4',
@@ -161,7 +157,24 @@ class UserController {
       res.status(500).json({ message: 'Ошибка сервера' });
     }
   }
-
+  async getUserSubscriptionsVideo(req, res) {
+    try {
+      const { arrayId } = await req.body;
+      const userVideo = [];
+      Video.find((err, videos) => {
+        if (err) throw err;
+        for (let i = 0; i < arrayId.length; i++) {
+          videos.filter((video) =>
+            video.authroId === arrayId[i] ? userVideo.push(video) : false
+          );
+        }
+        res.status(200).json(userVideo);
+      });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ message: 'Ошибка сервера' });
+    }
+  }
   async setAboutText(req, res) {
     try {
       const { aboutText, id } = req.body;
@@ -211,7 +224,9 @@ class UserController {
     try {
       User.findOne({ _id: req.params.id }, (err, data) => {
         if (err) console.log(err);
-        res.status(200).json(data.about);
+        data !== null
+          ? res.status(200).json(data.about)
+          : res.status(200).json([]);
       });
     } catch (err) {
       if (err) console.log(err);

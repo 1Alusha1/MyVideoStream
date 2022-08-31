@@ -11,7 +11,7 @@ export default function UserVideo() {
     user.getUserVideos(params.id).then((data) => {
       setVideos(data);
     });
-  }, [videos]);
+  }, []);
 
   return (
     <div className='user-videos'>

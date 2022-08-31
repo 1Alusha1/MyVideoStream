@@ -18,7 +18,6 @@ class Video {
     return res.json();
   }
   async subscribe(userData) {
-    console.log(userData)
     const res = await fetch('http://localhost:3001/api/video/subscribe', {
       method: 'post',
       body: JSON.stringify(userData),

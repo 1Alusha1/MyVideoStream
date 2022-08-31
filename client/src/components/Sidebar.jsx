@@ -22,7 +22,7 @@ export default function Sidebar() {
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? 'active' : '')}
-          to='/main/subscriptions'
+          to={`/main/channel/${userId}/subscriptions`}
           onClick={() => dispatch({ type: 'BURGER_IS_ACTIVE' })}
         >
           <li>Подписки</li>
