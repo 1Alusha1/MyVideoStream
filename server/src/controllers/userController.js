@@ -233,6 +233,17 @@ class UserController {
       res.status(500).json({ message: 'Ошибка сервера' });
     }
   }
+  async getAllVideo(req, res) {
+    try {
+      Video.find((err, videos) => {
+        if (err) console.log(err);
+        videos.length ? res.status(200).json(videos) : res.status(200).json([]);
+      });
+    } catch (err) {
+      if (err) console.log(err);
+      res.status(500).json({ message: 'Ошибка сервера' });
+    }
+  }
 }
 
 module.exports = new UserController();

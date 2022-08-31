@@ -25,4 +25,7 @@ router.get('/getVideoFile/:id/:videoName/:file', UserController.getVideoFile);
 
 router.get('/getUserSubscriptions', UserController.getUserSubscriptions);
 router.get('/getAboutInfo/:id', UserController.getAboutInfo);
+
+router.get('/getAllVideo',UserController.getAllVideo)
+
 module.exports = router;

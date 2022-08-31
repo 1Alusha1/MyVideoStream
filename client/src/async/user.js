@@ -106,6 +106,17 @@ class User {
       console.log(err);
     }
   }
+
+  async getAllVideo() {
+    try {
+      const res = await fetch('http://localhost:3001/api/user/getAllVideo');
+      const data = res.json();
+
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 export default new User();

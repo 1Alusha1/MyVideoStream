@@ -37,7 +37,9 @@
   display: flex;
   color: #fff;
 }
-
+.video-name a{
+  color: #fff;
+}
 .like,
 .dislike {
   display: flex;

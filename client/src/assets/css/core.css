@@ -5,6 +5,7 @@
 @import url('./pages/video.css');
 @import url('./pages/user-chanal.css');
 @import url('./pages/user-about.css');
+@import url('./pages/main.css');
 
 /* components */
 @import url('./components/input.css');
