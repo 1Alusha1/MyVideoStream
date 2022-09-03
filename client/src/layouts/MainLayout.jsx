@@ -9,7 +9,6 @@ import { useEffect } from 'react';
 export default function MainLayout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const burgerIsActive = useSelector(
     (state) => state.burgerReduser.burgerIsActive
   );

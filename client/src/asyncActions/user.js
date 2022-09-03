@@ -12,6 +12,8 @@ export const fetchUserByToken = () => {
     const data = res.json();
     data.then((data) => {
       dispatch(getUserByTokenAction(data));
+
+      console.log(data.id)
       user.getUserSubscriptions(data.id).then((subscription) => {
         dispatch(getUserSubscriptions(subscription))
       });

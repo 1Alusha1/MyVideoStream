@@ -130,6 +130,18 @@ class User {
       console.log(err);
     }
   }
+  async getCountFollowers(id) {
+    try {
+      const res = await fetch(`http://localhost:3001/api/user/getCountFollowers`, {
+        method: 'POST',
+        body: JSON.stringify({ id }),
+        headers: { 'content-type': 'application/json' },
+      });
+      return res.json();
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 export default new User();

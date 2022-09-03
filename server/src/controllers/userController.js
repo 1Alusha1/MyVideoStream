@@ -260,6 +260,22 @@ class UserController {
       res.status(500).json({ message: 'Ошибка сервера' });
     }
   }
+  async getCountFollowers(req, res) {
+    try {
+      const { id } = req.body;
+
+      User.findOne({ _id: id }, (err, data) => {
+        if (err) console.log(err);
+        console.log(data);
+        res
+          .status(200)
+          .json({ count: data.usersFollowers.length, username: data.username });
+      });
+    } catch (err) {
+      if (err) console.log(err);
+      res.status(500).json({ message: 'Ошибка сервера' });
+    }
+  }
 }
 
 module.exports = new UserController();

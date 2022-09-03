@@ -1,82 +1,37 @@
 const Video = require('../models/Video');
 const User = require('../models/User');
-const chekUserLikeOrDislike = require('../use/chekUserLikeOrDislike');
+const checkReaction = require('../use/checkReaction');
+const like = require('../use/like');
+const dislike = require('../use/dislike');
+
 class VideoController {
-  async like(req, res) {
+  async userReaction(req, res) {
     try {
-      const { id, userId } = req.body;
-      chekUserLikeOrDislike(userId, id).then((data) => {
-        if (data.length) {
-          Video.findOneAndUpdate({ _id: id }, { $inc: { like: -1 } }, (err) => {
-            if (err) throw err;
-          });
-          User.findOneAndUpdate(
-            { _id: userId },
-            { $pull: { userLike: { video: id } } },
-            { new: true },
-            (err) => {
-              if (err) throw err;
-            }
-          );
-          return res.status(200).json({ message: 'Лайк убран' });
+      const { videoId, userId, opinion } = req.body;
+      checkReaction(userId, videoId, opinion).then((data) => {
+        if (opinion) {
+          if (data.like) {
+            like.setLike(userId, videoId, () => {
+              res.status(200).json({ message: 'лайк поставлен' });
+            });
+            data.dislike === false &&
+              dislike.removeDislike(userId, videoId, () => {});
+          } else {
+            like.removeLike(userId, videoId, () => {
+              res.status(200).json({ message: 'лайк убран' });
+            });
+          }
         } else {
-          Video.findOneAndUpdate({ _id: id }, { $inc: { like: 1 } }, (err) => {
-            if (err) throw err;
-          });
-          User.findOneAndUpdate(
-            { _id: userId },
-            { $push: { userLike: { video: id } } },
-            { new: true },
-            (err) => {
-              if (err) throw err;
-            }
-          );
-          return res.status(200).json({ message: 'Лайк Поставлен' });
-        }
-      });
-    } catch (err) {
-      console.log(err);
-      return res.status(500).json({ message: 'Ошибка сервера' });
-    }
-  }
-  async disLike(req, res) {
-    try {
-      const { id, userId } = req.body;
-      chekUserLikeOrDislike(userId, id, false).then((data) => {
-        if (data.length > 0) {
-          Video.findOneAndUpdate(
-            { _id: id },
-            { $inc: { dislike: -1 } },
-            (err) => {
-              if (err) throw err;
-            }
-          );
-          User.findOneAndUpdate(
-            { _id: userId },
-            { $pull: { userDisLike: { video: id } } },
-            { new: true },
-            (err) => {
-              if (err) throw err;
-            }
-          );
-          return res.status(200).json({ message: 'Дизлайк убран' });
-        } else {
-          Video.findOneAndUpdate(
-            { _id: id },
-            { $inc: { dislike: 1 } },
-            (err) => {
-              if (err) throw err;
-            }
-          );
-          User.findOneAndUpdate(
-            { _id: userId },
-            { $push: { userDisLike: { video: id } } },
-            { new: true },
-            (err) => {
-              if (err) throw err;
-            }
-          );
-          return res.status(200).json({ message: 'Дизлайк Поставлен' });
+          if (data.dislike) {
+            dislike.setDislike(userId, videoId, () => {
+              res.status(200).json({ message: 'дизлайк поставлен' });
+            });
+            data.like === false && like.removeLike(userId, videoId, () => {});
+          } else {
+            dislike.removeDislike(userId, videoId, () => {
+              res.status(200).json({ message: 'дизлайк убран' });
+            });
+          }
         }
       });
     } catch (err) {
@@ -88,8 +43,9 @@ class VideoController {
     try {
       const { userId, authorId, authorname, username } = req.body;
       let flag;
+      console.log(req.body);
       User.findOne({ _id: userId }, (err, user) => {
-        if (user.userSubscriptions.length) {
+        if (user.userSubscriptions) {
           flag = user.userSubscriptions.filter((item) =>
             item.authorId == authorId ? item : false
           );

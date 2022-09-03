@@ -17,28 +17,27 @@ export default function UserVideo() {
   const [subscribersVideo, setSubscribersVideo] = useState([]);
   let [like, setLike] = useState();
   let [disLike, setdisLike] = useState();
-  const curentUser = useSelector((state) => state.userReducer.user.id);
+  const curentUser = useSelector((state) => state.userReducer.user);
   useEffect(() => {
     videoAsync.view(params.id);
-    user.getUserVideo(params.id).then(
-      (data) => {
-        setVideo(data);
-        setLike(data[0].like);
-        setdisLike(data[0].dislike);
-      },
-      [video]
-    );
+    user.getUserVideo(params.id).then((data) => {
+      setVideo(data);
+      setLike(data[0].like);
+      setdisLike(data[0].dislike);
+    });
     videoAsync.getComments(params.id).then((data) => {
       setComments(data);
     });
   }, []);
 
-  if (!subscribersVideo.length) {
-    userAsync.getUserSubscriptions(curentUser).then(async (data) => {
+  let count = 0;
+
+  if (!subscribersVideo.length && count >= 1) {
+    count++;
+    userAsync.getUserSubscriptions(curentUser.id).then(async (data) => {
       const getSubscribersVideo = [];
       await data.forEach((users) => getSubscribersVideo.push(users.authorId));
 
-      console.log(getSubscribersVideo);
       await userAsync
         .getUserSubscriptionsVideo(getSubscribersVideo)
         .then((userVideo) => {
@@ -47,21 +46,11 @@ export default function UserVideo() {
     });
   }
 
-  const sendLike = () => {
-    videoAsync.like({ id: params.id, userId: curentUser }).then((data) => {
-      data.message === 'Лайк Поставлен'
-        ? setLike((like += 1))
-        : setLike((like -= 1));
-    });
-  };
-
-  const sendDisLike = () => {
+  const userReaction = (opinion) => {
     videoAsync
-      .disLike({ id: params.id, userId: curentUser })
+      .userReaction({ videoId: params.id, userId: curentUser.id, opinion })
       .then((data) => {
-        data.message === 'Дизлайк Поставлен'
-          ? setdisLike((disLike += 1))
-          : setdisLike((disLike -= 1));
+        // дописать метод
       });
   };
   const subscribe = () => {
@@ -123,10 +112,10 @@ export default function UserVideo() {
               </div>
 
               <div className='user-video__contols'>
-                <div className='like' onClick={sendLike}>
+                <div className='like' onClick={() => userReaction(true)}>
                   <p>{like}</p> <button>Наравиться</button>
                 </div>
-                <div className='dislike' onClick={sendDisLike}>
+                <div className='dislike' onClick={() => userReaction(false)}>
                   <p>{disLike}</p> <button>Не наравиться</button>
                 </div>
               </div>

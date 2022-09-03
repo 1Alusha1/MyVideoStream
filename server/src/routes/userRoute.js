@@ -19,6 +19,8 @@ router.post(
 
 router.post('/search', UserController.search);
 
+router.post('/getCountFollowers', UserController.getCountFollowers);
+
 router.get(
   '/getVideoPreview/:id/:videoName/:file',
   UserController.getVideoPreview

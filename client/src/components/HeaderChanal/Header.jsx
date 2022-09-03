@@ -2,9 +2,19 @@ import UserIcon from '../ui/UserIcon';
 import { useParams, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Burger from '../ui/Burger';
+import { useEffect, useState } from 'react';
+import userAsync from '../../async/user';
+
 export default function Header() {
   const params = useParams();
   const user = useSelector((state) => state.userReducer.user);
+  const [followersCount, setFollowersCount] = useState(0);
+  useEffect(() => {
+    userAsync.getCountFollowers(params.id).then((data) => {
+      setFollowersCount(data);
+    });
+  }, []);
+
   return (
     <div className='user-chanal-header'>
       <div className='container'>
@@ -14,8 +24,8 @@ export default function Header() {
             <UserIcon />
           </a>
           <div className='user-chanal-header__detail'>
-            <p className='username'>{user.username}</p>
-            <p className='followers'>10 подпищиков</p>
+            <p className='username'>{followersCount.username}</p>
+            <p className='followers'>{followersCount.count} подпищиков</p>
           </div>
         </div>
 
