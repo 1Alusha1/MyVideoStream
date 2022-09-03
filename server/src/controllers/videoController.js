@@ -12,24 +12,24 @@ class VideoController {
         if (opinion) {
           if (data.like) {
             like.setLike(userId, videoId, () => {
-              res.status(200).json({ message: 'лайк поставлен' });
+              res.status(200).json({ message: 'лайк поставлен', data });
             });
             data.dislike === false &&
               dislike.removeDislike(userId, videoId, () => {});
           } else {
             like.removeLike(userId, videoId, () => {
-              res.status(200).json({ message: 'лайк убран' });
+              res.status(200).json({ message: 'лайк убран', data });
             });
           }
         } else {
           if (data.dislike) {
             dislike.setDislike(userId, videoId, () => {
-              res.status(200).json({ message: 'дизлайк поставлен' });
+              res.status(200).json({ message: 'дизлайк поставлен', data });
             });
             data.like === false && like.removeLike(userId, videoId, () => {});
           } else {
             dislike.removeDislike(userId, videoId, () => {
-              res.status(200).json({ message: 'дизлайк убран' });
+              res.status(200).json({ message: 'дизлайк убран', data });
             });
           }
         }

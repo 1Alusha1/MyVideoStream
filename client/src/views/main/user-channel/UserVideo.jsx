@@ -50,7 +50,21 @@ export default function UserVideo() {
     videoAsync
       .userReaction({ videoId: params.id, userId: curentUser.id, opinion })
       .then((data) => {
-        // дописать метод
+        if (data.data.like && data.data.dislike && opinion) {
+          setLike((like += 1));
+        } else if (!data.data.like && data.data.dislike && opinion) {
+          setLike((like -= 1));
+        } else if (data.data.like && data.data.dislike && !opinion) {
+          setdisLike((disLike += 1));
+        } else if (data.data.like && !data.data.dislike && !opinion) {
+          setdisLike((disLike -= 1));
+        } else if ((!data.data.like && data.data.dislike, !opinion)) {
+          setdisLike((disLike += 1));
+          setLike((like -= 1));
+        } else {
+          setdisLike((disLike -= 1));
+          setLike((like += 1));
+        }
       });
   };
   const subscribe = () => {
